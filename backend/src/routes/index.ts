@@ -9,9 +9,10 @@ import { validateUserBody, validateAuthentication } from '../middlewares/validat
 const router = Router();
 
 // Crash test route
-router.get('/crash-test', () => {
+router.get('/crash-test', (req: Request, res: Response, next: NextFunction) => {
+  res.send('Сейчас сервер упадёт');
   setTimeout(() => {
-    throw new Error('Сервер сейчас упадёт');
+    next(new Error('Сервер сейчас упадёт'));
   }, 0);
 });
 
